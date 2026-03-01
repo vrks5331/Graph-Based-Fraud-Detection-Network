@@ -29,6 +29,7 @@ Raw CSVs ─→ preprocess.py ─→ Processed Artifacts ─→ build_graph.py �
 | API | FastAPI + Uvicorn |
 | Frontend | Streamlit + Pyvis (in progress) |
 
+
 ## Project Structure
 
 ```
@@ -186,3 +187,4 @@ Will produce per-node fraud probability scores that feed into both the Louvain p
 - **Fraud rings** — dense clusters of tightly connected accounts with high aggregate risk
 - **High-risk accounts** — individual nodes with elevated GNN-predicted fraud probability
 - **Suspicious subgraph extraction** — isolated community subgraphs ready for visual inspection and BFS traversal
+
