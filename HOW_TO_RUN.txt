@@ -1,0 +1,152 @@
+================================================================================
+  HOW TO RUN: Graph-Based Fraud Detection Network
+================================================================================
+
+PREREQUISITES
+-------------
+  - Python 3.11 or higher
+  - pip (Python package manager)
+  - Git
+
+
+STEP 1: CLONE THE REPOSITORY
+-----------------------------
+  git clone https://github.com/vrks5331/Graph-Based-Fraud-Detection-Network.git
+  cd Graph-Based-Fraud-Detection-Network
+
+
+STEP 2: CREATE A VIRTUAL ENVIRONMENT
+-------------------------------------
+  python -m venv .venv
+
+  # Activate it:
+  # Windows:
+  .venv\Scripts\activate
+
+  # macOS / Linux:
+  source .venv/bin/activate
+
+
+STEP 3: INSTALL DEPENDENCIES
+-----------------------------
+  pip install -r requirements.txt
+
+  Required packages:
+    torch, torch-geometric, networkx, pandas, numpy, scikit-learn,
+    python-louvain, fastapi, uvicorn, streamlit, pyvis, requests
+
+
+STEP 4: PREPARE THE DATA
+-------------------------
+  Option A — Use the included dummy test data (recommended for demo):
+    The repository already includes pre-generated test data in:
+      data/testing/           (raw CSVs: accounts, transactions, alerts)
+      data/testing_processed/ (preprocessed artifacts ready for the pipeline)
+
+    No additional steps needed — the system will use this data automatically.
+
+  Option B — Use the real AMLSim dataset:
+    1. Place your raw AMLSim CSVs in data/raw/
+    2. Run the preprocessing pipeline:
+       python -m src.ingestion.preprocess
+
+  Option C — Regenerate the dummy test data:
+    python scripts/generate_dummy_data.py
+    python -m src.ingestion.preprocess
+
+
+STEP 5: START THE BACKEND API
+-------------------------------
+  Open a terminal and run:
+
+    uvicorn src.api.main:app --reload --port 8000
+
+  You should see output like:
+    INFO:     Uvicorn running on http://127.0.0.1:8000
+    INFO:     Application startup complete.
+
+  The API is now live at:
+    - http://localhost:8000         (API root)
+    - http://localhost:8000/docs    (Swagger interactive docs)
+
+  DO NOT close this terminal. Keep it running.
+
+
+STEP 6: START THE FRONTEND DASHBOARD
+--------------------------------------
+  Open a SECOND terminal, activate the virtual environment again, and run:
+
+    streamlit run src/dashboard/app.py
+
+  Streamlit will automatically open your browser to:
+    http://localhost:8501
+
+  The dashboard has two pages:
+    1. OVERVIEW — KPI metrics, full transaction network graph (250 nodes,
+       800 edges with fraud nodes highlighted in red), and community table.
+    2. CLUSTER INVESTIGATION — Select a suspicious cluster to see its BFS
+       explanation and interactive subgraph visualization.
+
+
+STEP 7 (OPTIONAL): TRAIN THE GNN MODEL
+-----------------------------------------
+  To train the GraphSAGE fraud classifier:
+
+    python -m src.models.train --epochs 30 --lr 0.001
+
+  The trained model weights are saved to models/fraud_gnn.pt.
+
+
+STEP 8 (OPTIONAL): RUN THE TEST SUITE
+----------------------------------------
+  To run all tests:
+    python -m pytest tests/ -v
+
+  To run specific test files:
+    python -m pytest tests/test_model.py -v         (GNN architecture)
+    python -m pytest tests/test_louvain.py -v        (Louvain detection)
+    python -m pytest tests/test_bfs_explainer.py -v  (BFS explainer)
+    python -m pytest tests/test_frontend.py -v       (Streamlit dashboard)
+    python -m pytest tests/test_integration.py -v    (end-to-end pipeline)
+    python -m pytest tests/test_api.py -v            (API endpoints)
+
+
+================================================================================
+  API ENDPOINTS REFERENCE
+================================================================================
+
+  GET  /api/health                              Health check
+  GET  /api/graph/summary                       Graph stats (nodes, edges, fraud, communities)
+  GET  /api/graph/nodes?skip=0&limit=100        Paginated node list
+  GET  /api/graph/nodes/{node_id}               Single node detail
+  GET  /api/graph/edges?skip=0&limit=100        Paginated edge list
+  GET  /api/graph/full                          Full graph (all nodes + edges)
+  GET  /api/communities                         All communities with metrics
+  GET  /api/communities/{cluster_id}            Community detail with member nodes
+  GET  /api/communities/{cluster_id}/subgraph   Community subgraph for visualization
+  GET  /api/explanations                        BFS explanations for all suspicious clusters
+  GET  /api/explanations/{cluster_id}           BFS explanation for a specific cluster
+
+
+================================================================================
+  TROUBLESHOOTING
+================================================================================
+
+  Problem: "Cannot reach backend" error on the Streamlit dashboard
+  Solution: Make sure the FastAPI backend is running on port 8000.
+            Run: uvicorn src.api.main:app --reload --port 8000
+
+  Problem: "ModuleNotFoundError" when running commands
+  Solution: Make sure your virtual environment is activated and all
+            dependencies are installed: pip install -r requirements.txt
+
+  Problem: Port 8000 or 8501 already in use
+  Solution: Kill the existing process or use a different port:
+            uvicorn src.api.main:app --reload --port 8001
+            streamlit run src/dashboard/app.py --server.port 8502
+
+  Problem: Graph visualization appears as a black box
+  Solution: Wait 10-30 seconds for the physics simulation to settle.
+            The graph uses inline CSS/JS so no CDN issues should occur.
+
+================================================================================
