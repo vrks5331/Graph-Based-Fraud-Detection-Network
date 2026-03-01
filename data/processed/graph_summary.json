@@ -1,0 +1,31 @@
+{
+  "num_nodes": 10000,
+  "num_edges": 68936,
+  "density": 0.0006894289428942894,
+  "num_weakly_connected_components": 2,
+  "degree_mean": 13.7872,
+  "degree_median": 11.0,
+  "degree_max": 217,
+  "in_degree_mean": 6.8936,
+  "out_degree_mean": 6.8936,
+  "num_fraud_nodes": 1685,
+  "num_legit_nodes": 8315,
+  "fraud_rate_pct": 16.85,
+  "tensor_shapes": {
+    "x": [
+      10000,
+      21
+    ],
+    "edge_index": [
+      2,
+      1323034
+    ],
+    "edge_attr": [
+      1323034,
+      3
+    ],
+    "y": [
+      10000
+    ]
+  }
+}
