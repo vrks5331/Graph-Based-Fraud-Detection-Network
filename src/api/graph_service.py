@@ -28,21 +28,16 @@ import pandas as pd
 # ── Internal pipeline imports ────────────────────────────────────────────────
 from src.detection.louvain import (
     ClusterMetrics,
-    compute_cluster_metrics,
-    detect_louvain_communities,
-    flag_suspicious_clusters,
-    get_community_subgraph,
     run_louvain_detection,
 )
 from src.explainability.bfs_explainer import (
     ClusterExplanation,
     explain_all_clusters,
-    explain_cluster,
 )
 
 # ── Path defaults ────────────────────────────────────────────────────────────
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
-_PROCESSED = _PROJECT_ROOT / "data" / "processed"
+_PROCESSED = _PROJECT_ROOT / "data" / "testing_processed"
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -150,8 +145,8 @@ class GraphService:
         result = run_louvain_detection(
             self.graph,
             node_risk=self.node_risk,
-            min_size=3,
-            min_average_risk=0.5,
+            min_size=2,            # Lowered for testing
+            min_average_risk=0.1,  # Lowered for testing
             min_density=0.1,
         )
 
@@ -176,7 +171,20 @@ class GraphService:
 
     def get_graph_summary(self) -> Dict[str, Any]:
         """Return high-level graph statistics."""
-        base = dict(self.graph_summary) if self.graph_summary else {}
+        # Start with graph_summary.json if present, else build from pipeline_meta
+        if self.graph_summary:
+            base = dict(self.graph_summary)
+        elif self.pipeline_meta:
+            base = {
+                "num_nodes": self.pipeline_meta.get("num_nodes", self.graph.number_of_nodes() if self.graph else 0),
+                "num_edges": self.pipeline_meta.get("num_edges", self.graph.number_of_edges() if self.graph else 0),
+                "num_fraud_nodes": self.pipeline_meta.get("num_fraud_nodes", 0),
+            }
+        else:
+            base = {
+                "num_nodes": self.graph.number_of_nodes() if self.graph else 0,
+                "num_edges": self.graph.number_of_edges() if self.graph else 0,
+            }
         base.update(
             {
                 "num_communities": len(set(self.partition.values())),
@@ -300,6 +308,30 @@ class GraphService:
             )
 
         return {"cluster_id": cluster_id, "nodes": nodes, "edges": edges}
+
+    def get_full_graph_data(self) -> Dict[str, Any]:
+        """Return ALL nodes and edges for a full-network overview visualization."""
+        nodes = []
+        for n in self.graph.nodes():
+            community = self.partition.get(n)
+            nodes.append({
+                "id": n,
+                "risk_score": self.node_risk.get(n, 0.0),
+                "label": self.node_labels.get(n, 0),
+                "community": community,
+                "is_suspicious": community in self.suspicious_ids if community is not None else False,
+            })
+
+        edges = []
+        for u, v, data in self.graph.edges(data=True):
+            edges.append({
+                "source": u,
+                "target": v,
+                "amount": data.get("amount", 0),
+                "is_fraud": data.get("is_fraud", 0),
+            })
+
+        return {"num_nodes": len(nodes), "num_edges": len(edges), "nodes": nodes, "edges": edges}
 
     # -- explanations --
 

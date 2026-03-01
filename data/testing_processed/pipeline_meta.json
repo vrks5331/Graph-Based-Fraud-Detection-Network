@@ -1,0 +1,17 @@
+{
+  "run_timestamp": "2026-03-01T20:25:04.268825+00:00",
+  "num_nodes": 250,
+  "num_edges": 800,
+  "node_feature_dim": 21,
+  "edge_feature_dim": 4,
+  "num_fraud_nodes": 6,
+  "num_legit_nodes": 244,
+  "output_files": [
+    "node_mapping.json",
+    "node_features.csv",
+    "edge_index.csv",
+    "edge_features.csv",
+    "node_labels.csv",
+    "pipeline_meta.json"
+  ]
+}

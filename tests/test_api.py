@@ -6,9 +6,6 @@ rather than depending on the real data files, so they generalise to any dataset.
 """
 
 import json
-import os
-import tempfile
-from dataclasses import asdict
 from pathlib import Path
 
 import networkx as nx
@@ -315,7 +312,7 @@ def client(processed_dir):
     from fastapi.testclient import TestClient
 
     from src.api.graph_service import GraphService
-    from src.api.main import app, get_service
+    from src.api.main import app
 
     svc = GraphService(processed_dir=processed_dir).load()
 

@@ -14,7 +14,6 @@ from src.detection.louvain import (
     flag_suspicious_clusters,
     get_all_community_subgraphs,
     get_community_subgraph,
-    get_suspicious_subgraphs,
     run_louvain_detection,
 )
 

@@ -118,6 +118,12 @@ def graph_edges(
     return get_service().get_edges(skip=skip, limit=limit)
 
 
+@app.get("/api/graph/full", tags=["graph"])
+def graph_full():
+    """Full graph (all nodes + edges) for overview visualization."""
+    return get_service().get_full_graph_data()
+
+
 # ═══════════════════════════════════════════════════════════════════════════════
 #  Communities
 # ═══════════════════════════════════════════════════════════════════════════════

@@ -14,7 +14,6 @@ from src.detection.louvain import (
 )
 from src.explainability.bfs_explainer import (
     ClusterExplanation,
-    TraversalStep,
     explain_all_clusters,
     explain_cluster,
     _select_seed_node,

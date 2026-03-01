@@ -1,4 +1,15 @@
 {
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
-    "python-envs.defaultEnvManager": "ms-python.python:system"
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}",
+        "${workspaceFolder}/.venv/Lib/site-packages"
+    ],
+    "pyre.searchRoots": [
+        "${workspaceFolder}"
+    ],
+    "pyre.sourcePaths": [
+        "${workspaceFolder}"
+    ],
+    "pyre.sitePackagePath": "${workspaceFolder}/.venv/Lib/site-packages"
 }

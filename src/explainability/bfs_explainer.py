@@ -25,7 +25,7 @@ from __future__ import annotations
 
 from collections import deque
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 import networkx as nx
 
@@ -264,10 +264,10 @@ def _build_summary(
         f"Nodes: {num_nodes}  |  Edges: {num_edges}  |  BFS Depth: {max_depth}",
         f"Average Risk Score: {avg_risk:.2f}",
         f"Total Transaction Volume: ${total_amount:,.2f}",
-        f"",
+        "",
         f"Root (highest-risk node): {seed.node} (risk={seed.node_risk:.2f})",
-        f"",
-        f"Traversal Order:",
+        "",
+        "Traversal Order:",
     ]
 
     for step in steps:
