@@ -35,3 +35,21 @@ Thumbs.db
 
 # Environment variables
 .env
+# Virtual environment
+.venv/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temp
+get-pip.py
