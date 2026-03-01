@@ -21,3 +21,5 @@ Fraud Patterns Detected:
 - Fraud rings (dense clusters)
 - High-risk accounts
 - Suspicious subgraph extraction
+
+
