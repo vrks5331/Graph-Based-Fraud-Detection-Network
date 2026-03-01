@@ -1,3 +1,40 @@
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.venv311/
+venv311/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Large data files (optional — uncomment if you don't want these in git)
+# data/processed/pyg_graph.pt
+# data/processed/*.csv
+# data/raw/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables
+.env
 # Virtual environment
 .venv/
 
