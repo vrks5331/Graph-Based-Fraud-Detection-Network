@@ -21,7 +21,7 @@ import random
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-
+from src.models.inference import generate_risk_scores
 import networkx as nx
 import pandas as pd
 
@@ -77,7 +77,7 @@ class GraphService:
         self._load_csvs()
         self._build_graph()
         self._load_json_meta()
-        self._generate_mock_risk_scores()
+        self._generate_gnn_risk_scores()
         self._run_pipeline()
         return self
 
@@ -124,19 +124,42 @@ class GraphService:
     #
     # Replace this method with real GNN inference once the model is trained.
 
-    def _generate_mock_risk_scores(self, seed: int = 42) -> None:
-        """Produce fake per-node risk scores from ground-truth labels + noise.
+    def _generate_gnn_risk_scores(self) -> None:
+        """Call the GNN inference script to populate node risk scores."""
+        # Paths are dynamically resolved based on the init _dir so it works for testing too
+        graph_path = self._dir / "pyg_graph.pt"
+        ckpt_path = self._dir / "gnn_checkpoint.pt"
+        mapping_path = self._dir / "node_mapping.json"
 
-        Fraud nodes  → uniform(0.65, 1.0)
-        Legit nodes  → uniform(0.0,  0.35)
-        """
-        rng = random.Random(seed)
+        # Generate the risk scores
+        scores_dict, _ = generate_risk_scores(
+            graph_path=graph_path,
+            ckpt_path=ckpt_path,
+            mapping_path=mapping_path,
+        )
+
+        # The inference output keys are strings (from node_mapping), but self.node_risk
+        # uses the raw integer node_ids (from node_features.csv "node_id").
+        # Fortunately, the inference module reads node_mapping.json which has keys as original IDs
+        # and values as integers, and its output is { original_id : probability }
+        
+        # We need to map the original string IDs back to the node_id in the graph
+        # Wait, the frontend and self.node_labels.items() uses integer node_ids.
+        # Let's read the mapping
+        import json
+        with open(mapping_path, "r") as f:
+            mapping = json.load(f)
+
+        # mapping: { "Acc_123": 0, "Acc_456": 1 }
+        # scores_dict: { "Acc_123": 0.95, "Acc_456": 0.01 }
+        
         self.node_risk = {}
-        for node_id, label in self.node_labels.items():
-            if label == 1:
-                self.node_risk[node_id] = round(rng.uniform(0.65, 1.0), 4)
-            else:
-                self.node_risk[node_id] = round(rng.uniform(0.0, 0.35), 4)
+        for original_id, prob in scores_dict.items():
+            if original_id in mapping:
+                node_id = mapping[original_id]
+                # Fallback to float just in case
+                self.node_risk[node_id] = float(prob)
+
 
     # ── 3. Pipeline ─────────────────────────────────────────────────────────
 

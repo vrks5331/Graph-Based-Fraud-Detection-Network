@@ -1,0 +1,808 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\CS Projects\datathon\graph-fraud-detection
+plugins: anyio-4.12.1
+collected 37 items
+
+tests\test_api.py .....................EEEEEEEEEEEEEEEE                  [100%]
+
+=================================== ERRORS ====================================
+______________ ERROR at setup of TestHealthEndpoint.test_health _______________
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+______________ ERROR at setup of TestGraphEndpoints.test_summary ______________
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+___________ ERROR at setup of TestGraphEndpoints.test_nodes_default ___________
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+_________ ERROR at setup of TestGraphEndpoints.test_nodes_pagination __________
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+____________ ERROR at setup of TestGraphEndpoints.test_node_detail ____________
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+__________ ERROR at setup of TestGraphEndpoints.test_node_not_found ___________
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+___________ ERROR at setup of TestGraphEndpoints.test_edges_default ___________
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+_________ ERROR at setup of TestGraphEndpoints.test_edges_pagination __________
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+_______ ERROR at setup of TestCommunityEndpoints.test_communities_list ________
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+_______ ERROR at setup of TestCommunityEndpoints.test_community_detail ________
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+______ ERROR at setup of TestCommunityEndpoints.test_community_not_found ______
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+______ ERROR at setup of TestCommunityEndpoints.test_community_subgraph _______
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+_ ERROR at setup of TestCommunityEndpoints.test_community_subgraph_not_found __
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+______ ERROR at setup of TestExplanationEndpoints.test_explanations_list ______
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+____ ERROR at setup of TestExplanationEndpoints.test_explanation_not_found ____
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+_ ERROR at setup of TestExplanationEndpoints.test_explanation_detail_if_exists _
+
+processed_dir = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed')
+
+    @pytest.fixture(scope="module")
+    def client(processed_dir):
+        """Create a FastAPI TestClient backed by our synthetic data."""
+        from unittest.mock import patch
+    
+        from fastapi.testclient import TestClient
+    
+        from src.api.graph_service import GraphService
+        from src.api.main import app
+    
+>       svc = GraphService(processed_dir=processed_dir).load()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api.py:347: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\api\graph_service.py:80: in load
+    self._generate_gnn_risk_scores()
+src\api\graph_service.py:135: in _generate_gnn_risk_scores
+    scores_dict, _ = generate_risk_scores(
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+src\models\inference.py:73: in generate_risk_scores
+    data = torch.load(graph_path, weights_only=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:1500: in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:768: in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <torch.serialization._open_file object at 0x0000021316709C90>
+name = WindowsPath('C:/Users/srive/AppData/Local/Temp/pytest-of-srive/pytest-13/data0/processed/pyg_graph.pt')
+mode = 'rb'
+
+    def __init__(self, name: str | os.PathLike[str], mode: str) -> None:
+>       super().__init__(open(name, mode))  # noqa: SIM115
+                         ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\srive\\AppData\\Local\\Temp\\pytest-of-srive\\pytest-13\\data0\\processed\\pyg_graph.pt'
+
+C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\serialization.py:749: FileNotFoundError
+============================== warnings summary ===============================
+tests/test_api.py::TestGraphService::test_graph_loaded
+  C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch_geometric\llm\utils\backend_utils.py:26: DeprecationWarning: `torch_geometric.distributed` has been deprecated since 2.7.0 and will no longer be maintained. For distributed training, refer to our tutorials on distributed training at https://pytorch-geometric.readthedocs.io/en/latest/tutorial/distributed.html or cuGraph examples at https://github.com/rapidsai/cugraph-gnn/tree/main/python/cugraph-pyg/cugraph_pyg/examples
+    from torch_geometric.distributed import (
+
+tests/test_api.py::TestGraphService::test_graph_loaded
+tests/test_api.py::TestGraphService::test_graph_loaded
+  C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\jit\_script.py:1480: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+tests/test_api.py::TestHealthEndpoint::test_health
+  C:\CS Projects\datathon\graph-fraud-detection\src\api\main.py:61: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+tests/test_api.py::TestHealthEndpoint::test_health
+  C:\Users\srive\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py:4599: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR tests/test_api.py::TestHealthEndpoint::test_health - FileNotFoundError:...
+ERROR tests/test_api.py::TestGraphEndpoints::test_summary - FileNotFoundError...
+ERROR tests/test_api.py::TestGraphEndpoints::test_nodes_default - FileNotFoun...
+ERROR tests/test_api.py::TestGraphEndpoints::test_nodes_pagination - FileNotF...
+ERROR tests/test_api.py::TestGraphEndpoints::test_node_detail - FileNotFoundE...
+ERROR tests/test_api.py::TestGraphEndpoints::test_node_not_found - FileNotFou...
+ERROR tests/test_api.py::TestGraphEndpoints::test_edges_default - FileNotFoun...
+ERROR tests/test_api.py::TestGraphEndpoints::test_edges_pagination - FileNotF...
+ERROR tests/test_api.py::TestCommunityEndpoints::test_communities_list - File...
+ERROR tests/test_api.py::TestCommunityEndpoints::test_community_detail - File...
+ERROR tests/test_api.py::TestCommunityEndpoints::test_community_not_found - F...
+ERROR tests/test_api.py::TestCommunityEndpoints::test_community_subgraph - Fi...
+ERROR tests/test_api.py::TestCommunityEndpoints::test_community_subgraph_not_found
+ERROR tests/test_api.py::TestExplanationEndpoints::test_explanations_list - F...
+ERROR tests/test_api.py::TestExplanationEndpoints::test_explanation_not_found
+ERROR tests/test_api.py::TestExplanationEndpoints::test_explanation_detail_if_exists
+================= 21 passed, 5 warnings, 16 errors in 10.39s ==================

@@ -271,11 +271,16 @@ if page == "📊 Overview":
         st.stop()
 
     # ── KPI metrics ─────────────────────────────────────────────────────────
+    def format_metric(val):
+        if isinstance(val, (int, float)):
+            return f"{val:,}"
+        return str(val)
+
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("🏦 Accounts (Nodes)", f"{summary.get('num_nodes', '?'):,}")
-    c2.metric("💸 Transactions (Edges)", f"{summary.get('num_edges', '?'):,}")
-    c3.metric("🚨 Fraud Nodes", f"{summary.get('num_fraud_nodes', '?'):,}")
-    c4.metric("🧩 Communities", f"{summary.get('num_communities', '?'):,}")
+    c1.metric("🏦 Accounts (Nodes)", format_metric(summary.get('num_nodes', '?')))
+    c2.metric("💸 Transactions (Edges)", format_metric(summary.get('num_edges', '?')))
+    c3.metric("🚨 Fraud Nodes", format_metric(summary.get('num_fraud_nodes', '?')))
+    c4.metric("🧩 Communities", format_metric(summary.get('num_communities', '?')))
 
     st.divider()
 

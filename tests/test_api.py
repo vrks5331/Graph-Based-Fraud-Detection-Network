@@ -120,6 +120,12 @@ def _make_processed_dir(tmp_path: Path, num_nodes: int = 20) -> Path:
     with open(out / "pipeline_meta.json", "w") as f:
         json.dump(meta, f)
 
+    # -- node mapping mock --
+    # generate_risk_scores reads node_mapping.json
+    mapping = {f"Acc_{i}": i for i in range(num_nodes)}
+    with open(out / "node_mapping.json", "w") as f:
+        json.dump(mapping, f)
+
     return out
 
 
@@ -140,8 +146,32 @@ class TestGraphService:
     @pytest.fixture(autouse=True)
     def _setup(self, processed_dir):
         from src.api.graph_service import GraphService
+        import random
+        from unittest.mock import patch
 
-        self.svc = GraphService(processed_dir=processed_dir).load()
+        def mock_generate_risk_scores(graph_path, ckpt_path, mapping_path):
+            # Read mapping file to simulate keys
+            with open(mapping_path, "r") as f:
+                mapping = json.load(f)
+            
+            # Read node_labels.csv to know who is fraud
+            # The tests create it at processed_dir / "node_labels.csv"
+            labels_df = pd.read_csv(processed_dir / "node_labels.csv")
+            labels_dict = dict(zip(labels_df["node_id"], labels_df["label"]))
+
+            rng = random.Random(42)
+            scores = {}
+            # Generate scores matching the mapping
+            for original_id, node_id in mapping.items():
+                label = labels_dict.get(node_id, 0)
+                if label == 1:
+                    scores[original_id] = round(rng.uniform(0.65, 1.0), 4)
+                else:
+                    scores[original_id] = round(rng.uniform(0.0, 0.35), 4)
+            return scores, {}
+
+        with patch("src.api.graph_service.generate_risk_scores", side_effect=mock_generate_risk_scores):
+            self.svc = GraphService(processed_dir=processed_dir).load()
 
     # -- loading --
 
@@ -308,13 +338,30 @@ class TestGraphService:
 def client(processed_dir):
     """Create a FastAPI TestClient backed by our synthetic data."""
     from unittest.mock import patch
+    import random
 
     from fastapi.testclient import TestClient
 
     from src.api.graph_service import GraphService
     from src.api.main import app
+    
+    def mock_generate_risk_scores(graph_path, ckpt_path, mapping_path):
+        with open(mapping_path, "r") as f:
+            mapping = json.load(f)
+        labels_df = pd.read_csv(processed_dir / "node_labels.csv")
+        labels_dict = dict(zip(labels_df["node_id"], labels_df["label"]))
+        rng = random.Random(42)
+        scores = {}
+        for original_id, node_id in mapping.items():
+            label = labels_dict.get(node_id, 0)
+            if label == 1:
+                scores[original_id] = round(rng.uniform(0.65, 1.0), 4)
+            else:
+                scores[original_id] = round(rng.uniform(0.0, 0.35), 4)
+        return scores, {}
 
-    svc = GraphService(processed_dir=processed_dir).load()
+    with patch("src.api.graph_service.generate_risk_scores", side_effect=mock_generate_risk_scores):
+        svc = GraphService(processed_dir=processed_dir).load()
 
     # Override the service singleton so the app uses our test data
     def _override():

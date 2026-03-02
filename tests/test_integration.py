@@ -52,18 +52,41 @@ def mock_processed_dir():
             "feat_1": [1.0] * 5,
             "feat_2": [2.0] * 5
         }).to_csv(temp_path / "node_features.csv", index=False)
+        
+        # We need node_mapping.json for generate_risk_scores
+        mapping = {f"Acc_{i}": i for i in range(5)}
+        with open(temp_path / "node_mapping.json", "w") as f:
+            json.dump(mapping, f)
             
         yield temp_path
 
 
 def test_graph_service_pipeline(mock_processed_dir):
     """Test the end-to-end loading and detection pipeline inside GraphService."""
-    
+    from unittest.mock import patch
+    import random
+
+    def mock_generate_risk_scores(graph_path, ckpt_path, mapping_path):
+        with open(mapping_path, "r") as f:
+            mapping = json.load(f)
+        labels_df = pd.read_csv(mock_processed_dir / "node_labels.csv")
+        labels_dict = dict(zip(labels_df["node_id"], labels_df["label"]))
+        rng = random.Random(42)
+        scores = {}
+        for original_id, node_id in mapping.items():
+            label = labels_dict.get(node_id, 0)
+            if label == 1:
+                scores[original_id] = round(rng.uniform(0.65, 1.0), 4)
+            else:
+                scores[original_id] = round(rng.uniform(0.0, 0.35), 4)
+        return scores, {}
+        
     # 1. Initialize custom dir service
-    service = GraphService(processed_dir=mock_processed_dir)
-    
-    # 2. Run the load pipeline (csv loading -> graph build -> louvain -> bfs)
-    service.load()
+    with patch("src.api.graph_service.generate_risk_scores", side_effect=mock_generate_risk_scores):
+        service = GraphService(processed_dir=mock_processed_dir)
+        
+        # 2. Run the load pipeline (csv loading -> graph build -> louvain -> bfs)
+        service.load()
     
     # 3. Test Summary API
     summary = service.get_graph_summary()
